@@ -9,6 +9,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.UUID;
 
 public class DBManager {
     static final String JDBC_DRIVER = "org.h2.Driver";
@@ -29,7 +30,7 @@ public class DBManager {
                 Constructor<?> constructor = clz.getConstructor(double.class, double.class, double.class, double.class);
                 AbstractShape shape = (AbstractShape) constructor.newInstance(0, 0, 0, 0);
 
-                shape.setId(rs.getLong(1));
+                shape.setId(UUID.fromString(rs.getString(1)));
                 shape.setX0(rs.getDouble(3));
                 shape.setY0(rs.getDouble(4));
                 shape.setX1(rs.getDouble(5));
@@ -60,7 +61,7 @@ public class DBManager {
 
         try (Connection c = getConnection()) {
             PreparedStatement stmt = c.prepareStatement("insert into shapes (id, name, x1, y1, x2, y2, width, height, fillColor, borderColor) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            stmt.setLong(1, shape.getId());
+            stmt.setString(1, shape.getId().toString());
             stmt.setString(2, shape.getClass().getSimpleName());
             stmt.setDouble(3, shape.getX0());
             stmt.setDouble(4, shape.getY0());
@@ -94,7 +95,7 @@ public class DBManager {
         try (Connection c = getConnection()) {
             PreparedStatement stmt = c.prepareStatement(
                     String.format(Locale.ENGLISH,
-                        "update shapes set x1 = %f, y1 = %f, x2 = %f, y2 = %f, width = %f, height = %f, borderColor = \'%s\', fillColor = \'%s\' where id = %d and name = \'%s\'",
+                        "update shapes set x1 = %f, y1 = %f, x2 = %f, y2 = %f, width = %f, height = %f, borderColor = \'%s\', fillColor = \'%s\' where id = \'%s\' and name = \'%s\'",
                             request.getX0(), request.getY0(), request.getX1(), request.getY1(), request.getWidth(), request.getHeight(), request.getBorderColor(), request.getFillColor(), request.getId(), request.getClass().getSimpleName()
                     )
             );
@@ -110,7 +111,7 @@ public class DBManager {
         try (Connection c = getConnection()) {
             PreparedStatement stmt = c.prepareStatement(
                     "delete from shapes " +
-                            "where id = " + request.getId() +
+                            "where id = '" + request.getId() + "'" +
                             " AND name = '" + request.getClass().getSimpleName() + "'");
             stmt.executeUpdate();
         } catch (SQLException exception) {
@@ -125,7 +126,7 @@ public class DBManager {
             PreparedStatement stmt = c.prepareStatement("DROP TABLE IF EXISTS SHAPES;");
             stmt.executeUpdate();
             PreparedStatement stmt1 = c.prepareStatement("create table Shapes (\n" +
-                    "    id numeric not null primary key,\n" +
+                    "    id varchar(50) not null primary key,\n" +
                     "    name varchar(15),\n" +
                     "    x1 numeric default 0,\n" +
                     "    y1 numeric default 0,\n" +

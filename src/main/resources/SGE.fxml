@@ -34,21 +34,21 @@
                      <children>
                         <VBox prefHeight="200.0" prefWidth="202.0">
                            <children>
-                              <HBox prefHeight="21.0" prefWidth="202.0">
+                              <HBox prefHeight="21.0" visible="false" prefWidth="202.0">
                                  <children>
-                                    <Button mnemonicParsing="false" onAction="#remove" text="удалить" />
+                                    <Button mnemonicParsing="false" text="удалить" />
                                     <TextField fx:id="deleteTF" />
                                  </children>
                               </HBox>
-                              <HBox prefHeight="23.0" prefWidth="202.0">
+                              <HBox prefHeight="23.0" visible="false" prefWidth="202.0">
                                  <children>
-                                    <Button mnemonicParsing="false" onAction="#update" text="обновить" />
+                                    <Button mnemonicParsing="false"  text="обновить" />
                                     <TextField fx:id="updateTF" />
                                  </children>
                               </HBox>
-                              <HBox prefHeight="18.0" prefWidth="202.0">
+                              <HBox prefHeight="18.0" visible="false" prefWidth="202.0">
                                  <children>
-                                    <Button mnemonicParsing="false" onAction="#search" text="Найти" />
+                                    <Button mnemonicParsing="false" text="Найти" />
                                     <TextField fx:id="sTf" />
                                  </children>
                               </HBox>

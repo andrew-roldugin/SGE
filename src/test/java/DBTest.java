@@ -7,6 +7,8 @@ import javafx.scene.paint.Color;
 import junit.framework.Assert;
 import org.junit.jupiter.api.Test;
 
+import java.util.UUID;
+
 public class DBTest {
     DBManager dbManager = new DBManager();
 
@@ -19,7 +21,7 @@ public class DBTest {
     public void testAdd(){
         dbManager.createNewTable();
         Triangle t = new Triangle(150, 200, 300,400);
-        t.setId(1L);
+        t.setId(UUID.randomUUID());
         dbManager.add(t);
         Assert.assertTrue(dbManager.search(t).contains(t));
     }
@@ -27,11 +29,11 @@ public class DBTest {
     public void testRemove(){
         dbManager.createNewTable();
         Triangle t = new Triangle(150, 200, 300,400);
-        t.setId(1L);
+        t.setId(UUID.randomUUID());
         Rectangle r = new Rectangle(15, 0, 30,40);
-        r.setId(2L);
+        r.setId(UUID.randomUUID());
         Star s = new Star(1, 1, 1, 1,  Color.RED, Color.BLUE);
-        s.setId(3L);
+        s.setId(UUID.randomUUID());
         dbManager.add(t);
         dbManager.add(r);
         dbManager.add(s);
@@ -42,11 +44,12 @@ public class DBTest {
     public void testUpdate(){
         dbManager.createNewTable();
         Pentagon p = new Pentagon(0, 0, 0,0);
-        p.setId(1L);
+        UUID id = UUID.randomUUID();
+        p.setId(id);
         dbManager.add(p);
         Assert.assertTrue(dbManager.search(p).contains(p));
         Pentagon pNew = new Pentagon(1000, 80, 706,90, Color.GRAY, Color.GOLD);
-        pNew.setId(1L);
+        pNew.setId(id);
         dbManager.update(pNew);
         Assert.assertFalse(dbManager.search(p).contains(p));
         Assert.assertTrue(dbManager.search(pNew).contains(pNew));

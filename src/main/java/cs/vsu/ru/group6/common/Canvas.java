@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class Canvas extends ResizableCanvas{
     private int height, width;
@@ -47,7 +48,8 @@ public class Canvas extends ResizableCanvas{
     public AbstractShape addShape(AbstractShape shape){
         if(shape == null)
             return null;
-        shape.setId(((long) list.size() + 1));
+        UUID id = UUID.randomUUID();
+        shape.setId(id);
         this.list.add(shape);
         paint(shape);
         return shape;

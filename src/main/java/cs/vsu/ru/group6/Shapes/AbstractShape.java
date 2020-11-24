@@ -3,12 +3,14 @@ package cs.vsu.ru.group6.Shapes;
 import cs.vsu.ru.group6.common.*;
 import javafx.scene.paint.Color;
 
+import java.util.UUID;
+
 public abstract class AbstractShape implements IShape, Drawable,
         Storeable,
         SMCMouseActionListener, DMCMouseActionListener {
 
 
-    private Long id;
+    private UUID id;
     private double x0, y0;
     private double x1, y1;
     private boolean selected = false;
@@ -141,12 +143,12 @@ public abstract class AbstractShape implements IShape, Drawable,
     }
 
     @Override
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
     @Override
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

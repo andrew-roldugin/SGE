@@ -1,6 +1,8 @@
 package cs.vsu.ru.group6.common;
 
+import java.util.UUID;
+
 public interface Storeable {
-    Long getId();
-    void setId(Long id);
+    UUID getId();
+    void setId(UUID id);
 }

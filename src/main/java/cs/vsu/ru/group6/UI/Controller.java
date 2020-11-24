@@ -142,19 +142,4 @@ public class Controller implements Initializable {
         });
     }
 
-    public void remove(ActionEvent actionEvent) {
-        Triangle t = new Triangle(387.80000000000007,	61.4, 	515.8000000000001,	242.20000000000002, null, null);
-        t.setId(4L);
-        dbManager.remove(t);
-    }
-
-    public void update(ActionEvent actionEvent) {
-        Star s = new Star(1,1,1,1);
-        s.setId(10L);
-        dbManager.update(s);
-    }
-
-    public void search(ActionEvent actionEvent) {
-        dbManager.search(new Star(0,0, 0, 0));
-    }
 }

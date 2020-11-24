@@ -1,5 +1,5 @@
 create table Shapes (
-    id numeric not null primary key,
+    id varchar(50) not null primary key,
     name varchar(15),
     x1 numeric default 0,
     y1 numeric default 0,
